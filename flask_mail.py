@@ -296,6 +296,8 @@ class Message(object):
 
     @property
     def send_to(self):
+        if self.recipients:
+            self.recipients = [r for r in self.recipients if r is not None]
         return set(self.recipients) | set(self.bcc or ()) | set(self.cc or ())
 
     @property
